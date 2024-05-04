@@ -1,10 +1,10 @@
+import java.util.Objects;
 
 class Contact {
     private String name;
     private String phoneNumber;
     private String email;
 
-    
     public Contact() {
     }
 
@@ -39,6 +39,21 @@ class Contact {
         this.email = email;
     }
 
-    // Implement equals() and hashCode() methods to prevent duplicates
-}
+    // Implemented equals() and hashCode() methods to prevent duplicates
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true; 
+        if (obj == null || getClass() != obj.getClass())
+            return false; 
+        Contact contact = (Contact) obj; 
+        return Objects.equals(name, contact.name) &&
+                Objects.equals(phoneNumber, contact.phoneNumber) &&
+                Objects.equals(email, contact.email);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, phoneNumber, email);
+    }
+}
